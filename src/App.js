@@ -1,26 +1,52 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {Map} from "immutable";
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import './index.css';
+const init = Map({
 
+});
+const reducer = (state = [], action) => {
+  var newState = init;
+    switch (action.type) {
+        case 'CREATE_MAP_OPEN':
+            newState = state.setIn(['MyMaps', 'CreateMap', 'is_open'], true);
+            break;
+        default:
+            break;
+    }
+    return newState;
+}
+const store = createStore(reducer);
+const Parent = ()=>{
+    return (
+        <div className="layout">
+            <h1>Parent</h1>
+            <Child1></Child1>
+            <Child2></Child2>
+        </div>
+    );
+}
+const Child1 = ()=>{
+    return (
+        <div className="layout">
+            <h1>Child1</h1>
+        </div>
+    );
+}
+const Child2 = ()=>{
+    return (
+        <div className="layout">
+            <h1>Child2</h1>
+        </div>
+    );
+}
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <Parent>
+      </Parent>
+    </Provider>
   );
 }
-
 export default App;
