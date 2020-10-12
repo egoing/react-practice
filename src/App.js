@@ -6,6 +6,8 @@ import Component2 from './Component2';
 function App() {
   return (
     <div>
+      <Component1></Component1>
+      <Component2></Component2>
     </div>
   );
 }
